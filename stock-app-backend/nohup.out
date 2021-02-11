@@ -1,0 +1,103 @@
+
+> stock-app-backend@1.0.0 start /home/pisamifa/Image-stack/stock-app-backend
+> node server.js
+
+(node:26012) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+Running at localhost:3000
+Executing (default): CREATE TABLE IF NOT EXISTS `images` (`id` INTEGER auto_increment , `file240` VARCHAR(255) NOT NULL, `file720` VARCHAR(255) NOT NULL, `name` VARCHAR(255) NOT NULL, `description` VARCHAR(255), `hashTags` VARCHAR(255), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `images`
+Executing (default): CREATE TABLE IF NOT EXISTS `hashtags` (`id` INTEGER auto_increment , `hashtag` CHAR(50) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `hashtags`
+Executing (default): CREATE TABLE IF NOT EXISTS `file_hashtag` (`createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `imageid` INTEGER , `hashTagid` INTEGER , PRIMARY KEY (`imageid`, `hashTagid`), FOREIGN KEY (`imageid`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`hashTagid`) REFERENCES `hashtags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `file_hashtag`
+
+> stock-app-backend@1.0.0 start /home/pisamifa/Image-stack/stock-app-backend
+> node server.js
+
+(node:26046) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+Running at localhost:3000
+Executing (default): CREATE TABLE IF NOT EXISTS `images` (`id` INTEGER auto_increment , `file240` VARCHAR(255) NOT NULL, `file720` VARCHAR(255) NOT NULL, `name` VARCHAR(255) NOT NULL, `description` VARCHAR(255), `hashTags` VARCHAR(255), `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `images`
+Executing (default): CREATE TABLE IF NOT EXISTS `hashtags` (`id` INTEGER auto_increment , `hashtag` CHAR(50) NOT NULL, `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `hashtags`
+Executing (default): CREATE TABLE IF NOT EXISTS `file_hashtag` (`createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, `imageid` INTEGER , `hashTagid` INTEGER , PRIMARY KEY (`imageid`, `hashTagid`), FOREIGN KEY (`imageid`) REFERENCES `images` (`id`) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (`hashTagid`) REFERENCES `hashtags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `file_hashtag`
+(node:26046) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+request came to worker
+(node:26046) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+request came to worker
+Executing (default): INSERT INTO `images` (`id`,`file240`,`file720`,`name`,`description`,`hashTags`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 1 AND `file_hashtag`.`hashTagid` IN (1);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 1 AND `file_hashtag`.`hashTagid` IN (2);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 1 AND `file_hashtag`.`hashTagid` IN (3);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:43','2021-01-25 11:31:43',1,1);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:43','2021-01-25 11:31:43',1,2);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:43','2021-01-25 11:31:43',1,3);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 1 AND `file_hashtag`.`imageid` IN (1);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 2 AND `file_hashtag`.`imageid` IN (1);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 3 AND `file_hashtag`.`imageid` IN (1);
+(node:26046) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+request came to worker
+Error: Expected positive integer for width but received 1902.9999999999998 of type number
+    at Object.invalidParameterError (/home/pisamifa/Image-stack/stock-app-backend/node_modules/sharp/lib/is.js:101:10)
+    at Sharp.resize (/home/pisamifa/Image-stack/stock-app-backend/node_modules/sharp/lib/resize.js:214:16)
+    at Object.resizeImages240 (/home/pisamifa/Image-stack/stock-app-backend/app/middleware/upload.js:31:10)
+    at async AsyncFunction.uploadProcess (/home/pisamifa/Image-stack/stock-app-backend/app/routes/upload-worker-thread.js:17:25)
+(node:26046) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+request came to worker
+Error: Expected positive integer for width but received 1902.9999999999998 of type number
+    at Object.invalidParameterError (/home/pisamifa/Image-stack/stock-app-backend/node_modules/sharp/lib/is.js:101:10)
+    at Sharp.resize (/home/pisamifa/Image-stack/stock-app-backend/node_modules/sharp/lib/resize.js:214:16)
+    at Object.resizeImages240 (/home/pisamifa/Image-stack/stock-app-backend/app/middleware/upload.js:31:10)
+    at async AsyncFunction.uploadProcess (/home/pisamifa/Image-stack/stock-app-backend/app/routes/upload-worker-thread.js:17:25)
+Executing (default): INSERT INTO `images` (`id`,`file240`,`file720`,`name`,`description`,`hashTags`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 2 AND `file_hashtag`.`hashTagid` IN (4);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:48','2021-01-25 11:31:48',2,4);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 2 AND `file_hashtag`.`hashTagid` IN (5);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 2 AND `file_hashtag`.`hashTagid` IN (6);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 4 AND `file_hashtag`.`imageid` IN (2);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:48','2021-01-25 11:31:48',2,5);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:48','2021-01-25 11:31:48',2,6);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 5 AND `file_hashtag`.`imageid` IN (2);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 6 AND `file_hashtag`.`imageid` IN (2);
+(node:26046) [SEQUELIZE0004] DeprecationWarning: A boolean value was passed to options.operatorsAliases. This is a no-op with v5 and should be removed.
+request came to worker
+Executing (default): INSERT INTO `images` (`id`,`file240`,`file720`,`name`,`description`,`hashTags`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): INSERT INTO `hashtags` (`id`,`hashtag`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 3 AND `file_hashtag`.`hashTagid` IN (7);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:54','2021-01-25 11:31:54',3,7);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 3 AND `file_hashtag`.`hashTagid` IN (8);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`imageid` = 3 AND `file_hashtag`.`hashTagid` IN (9);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:54','2021-01-25 11:31:54',3,8);
+Executing (default): INSERT INTO `file_hashtag` (`createdAt`,`updatedAt`,`imageid`,`hashTagid`) VALUES ('2021-01-25 11:31:54','2021-01-25 11:31:54',3,9);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 7 AND `file_hashtag`.`imageid` IN (3);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 8 AND `file_hashtag`.`imageid` IN (3);
+Executing (default): SELECT `createdAt`, `updatedAt`, `imageid`, `hashTagid` FROM `file_hashtag` AS `file_hashtag` WHERE `file_hashtag`.`hashTagid` = 9 AND `file_hashtag`.`imageid` IN (3);
+{
+  tagx: [],
+  datex: [ undefined, undefined ],
+  descx: undefined,
+  pagex: 0
+}
+select file240, name, description, hashTags, createdAt
+from images order by createdAt desc limit 0,30
+{
+  tagx: [],
+  datex: [ undefined, undefined ],
+  descx: undefined,
+  pagex: 0
+}
+select file240, name, description, hashTags, createdAt
+from images order by createdAt desc limit 0,30
+Executing (default): select file240, name, description, hashTags, createdAt
+from images order by createdAt desc limit 0,30
+Executing (default): select file240, name, description, hashTags, createdAt
+from images order by createdAt desc limit 0,30
