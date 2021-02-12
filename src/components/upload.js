@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import '../../node_modules/font-awesome/css/font-awesome.min.css'; 
-import './upload.css'
+import './upload.css';
+import './dropZone.css';
 
 export default class Upload extends Component {
-    baseUrl="http://localhost:8090";
+    baseUrl="https://localhost:3000";
     fileObj =[];
     fileArray=[];
     allowedExtensions = ['jpg' , 'png' , 'svg']
@@ -142,6 +143,34 @@ export default class Upload extends Component {
     })
     return responses;    
   }
+
+  
+    dragOver = (e) => {
+      e.preventDefault();
+    }
+
+    dragEnter = (e) => {
+      e.preventDefault();
+    }
+
+    dragLeave = (e) => {
+      e.preventDefault();
+    }
+
+    fileDrop = async(e) => {
+      e.preventDefault();
+      const images = e.dataTransfer.files;
+      let image = this.validateFiles(images);
+      for await(let file of image){
+        if(file !== undefined){
+          this.uploadImages.push(file);
+        }      
+      }
+      this.setState({
+          image: this.uploadImages
+          
+      })
+    }
     render() {
         
         return (
@@ -150,7 +179,7 @@ export default class Upload extends Component {
               
 
             <h1> UPLOAD FILES</h1>
-            <div className="button-container">
+            <div className="button-container" style={{display:"none"}}>
                 <div className="hover">
                     
 
@@ -163,6 +192,19 @@ export default class Upload extends Component {
                     </div>
                 </div>
 
+            </div>
+              <div className="DZcontainer" onClick={this.handleClick}>
+                  <div className="drop-container"
+                  onDragOver={this.dragOver}
+                  onDragEnter={this.dragEnter}
+                  onDragLeave={this.dragLeave}
+                  onDrop={this.fileDrop}
+                  >
+                  <div className="drop-message" >
+                      <div className="upload-icon"></div>
+                          Drag & Drop files here or click to upload
+                  </div>
+              </div>
             </div>
             <div className="alert-message-container">
                 <span className="alert-message">{ this.afterUploadMessage }</span>

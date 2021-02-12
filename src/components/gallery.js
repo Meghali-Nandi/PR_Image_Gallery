@@ -3,7 +3,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import './gallery.css';
 
 export default function Gallery() {
-    const baseUrl="http://localhost:8090";
+    const baseUrl="https://localhost:3000";
     
     const [images, setImages] = React.useState([]);
     const [loaded, setIsLoaded] = React.useState(false); 

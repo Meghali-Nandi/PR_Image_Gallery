@@ -30,7 +30,7 @@ app.use(require('sanitize').middleware);
 
 
 app.use(express.static(__dirname + '/resources/file240'));
-// app.use(express.static(path.join(__dirname, "../stock-app-frontend/dist/stock-app-frontend")));
+app.use(express.static(path.join(__dirname, "../build/")));
 
 app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
@@ -47,7 +47,7 @@ db.sequelize.sync();
 let port = 3000;
 
 
-http.createServer(app).listen(8090);
-// https.createServer({ key: privateKey, cert: certificate }, app).listen(port, () => {
-//     console.log(`Running at localhost:${port}`);
-// });
+// http.createServer(app).listen(8090);
+https.createServer({ key: privateKey, cert: certificate }, app).listen(port, () => {
+    console.log(`Running at localhost:${port}`);
+});

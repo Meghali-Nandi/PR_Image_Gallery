@@ -143,7 +143,7 @@ let routes = (app) => {
 
     
     app.get("*", (req, res) => {
-        return res.sendFile(path.join(__dirname, "../../../stock-app-frontend/dist/stock-app-frontend/index.html"));
+        return res.sendFile(path.join(__dirname, "../../../build/index.html"));
     })
     return app.use("/", router);
 }

@@ -13,7 +13,6 @@ class App extends React.Component {
   state={
     loggedIn : sessionStorage.getItem('token') ? true: false,
     error: !sessionStorage.getItem('token') ? "You must log in first" : ''
-
   }
   render() {
     const { error } = this.state.error;
@@ -36,7 +35,9 @@ class App extends React.Component {
                 <li className="nav-item">
                 <Link className="nav-link" to={"/upload-images"}>Upload</Link>
                 </li>
-
+                <li className="nav-item">
+                <Link className="nav-link" to={"/"} onClick={() => { sessionStorage.clear(); window.location.reload() }}>Logout</Link>
+                </li>
 
             </ul>
         </div>
@@ -49,6 +50,7 @@ class App extends React.Component {
             <Route path="/sign-in" component={Login} />
             <ProtectedRoute path="/upload-images" loggedIn={this.state.loggedIn} component={Upload} />
             <ProtectedRoute path="/gallery" loggedIn={this.state.loggedIn} component={Gallery}/>
+            <ProtectedRoute path="/" loggedIn={this.state.loggedIn} component={Gallery} />
           </Switch>
       </div>
     </div></Router>
