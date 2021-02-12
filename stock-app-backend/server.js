@@ -44,7 +44,7 @@ db.sequelize.sync();
 // });
 
 
-let port = 3000;
+let port = 8080;
 
 
 // http.createServer(app).listen(8090);

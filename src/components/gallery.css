@@ -430,4 +430,13 @@ a.animated-button.thar-four:before {
     color: red;
 }
 
+.toast{
+    height: 20%;
+    box-shadow: none;
+    border: none;
+    font-size: large;
+    font-weight: 200;
+}
+
+
 

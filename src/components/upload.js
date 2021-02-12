@@ -6,7 +6,7 @@ import './upload.css';
 import './dropZone.css';
 
 export default class Upload extends Component {
-    baseUrl="https://localhost:3000";
+    baseUrl="https://localhost:8080";
     fileObj =[];
     fileArray=[];
     allowedExtensions = ['jpg' , 'png' , 'svg']
@@ -75,8 +75,6 @@ export default class Upload extends Component {
         image: this.uploadImages
         
     })
-    //  console.log(this.uploadImages);
-    console.log(this.state);
   }
   
 
@@ -129,7 +127,6 @@ export default class Upload extends Component {
             formData.append('file',file.file);
             formData.append('name', file.name);
             formData.append('description', file.description);
-            console.log("sending form data");
             let response = await fetch(this.baseUrl+'/upload',{
                 method:'POST',
                 body: formData

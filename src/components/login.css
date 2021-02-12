@@ -28,3 +28,11 @@
   border-radius: 15px;
   transition: all .3s;
 }
+
+.toast{
+  height: 20%;
+  box-shadow: none;
+  border: none;
+  font-size: large;
+  font-weight: 200;
+}

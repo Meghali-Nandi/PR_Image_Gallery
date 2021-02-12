@@ -25,6 +25,12 @@ let routes = (app) => {
     }));
     app.use(bodyParser.json());
 
+    User.create({
+        id: 1,
+        username: "admin",
+        password: crypto.createHash('md5').update('admin@1234').digest('hex')
+    })
+
     app.post('/delete/:id', async(req, res) => {
         console.log(req.params.id);
         const ids = parseInt(req.params.id);
@@ -100,6 +106,7 @@ let routes = (app) => {
             const filename = reqBody.name;
             const reqFile = req.file.buffer;
             const uuid = uuidv4();
+            filename= filename.replace(/\s/g, '');
             const file240 = `${uuid}-${filename}-240.jpeg`;
             const file720 = `${uuid}-${filename}-720.jpeg`;
             

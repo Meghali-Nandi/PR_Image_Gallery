@@ -1,9 +1,10 @@
 import React, { Component, useEffect, useReducer } from "react";
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import './gallery.css';
 
 export default function Gallery() {
-    const baseUrl="https://localhost:3000";
+    const baseUrl="https://localhost:8080";
     
     const [images, setImages] = React.useState([]);
     const [loaded, setIsLoaded] = React.useState(false); 
@@ -28,17 +29,17 @@ export default function Gallery() {
         onPageLoad();
     }, []);
 
-    const onDelete = (id,i)=> {
-        console.log(id);
+    const onDelete = (id,i,name)=> {
         fetch(`${baseUrl}/delete/${id}`,{
             method: 'POST'
         })
         .then((res) => {
             res.json().then((result) => {
-                console.log(result);
                 let newImages=[...images];
                 newImages.splice(i,1);
                 setImages([...newImages]);
+                ToastsStore.success(`Image ${name} deleted successfully`);
+
             })
         })
         .catch((err) => {
@@ -46,11 +47,18 @@ export default function Gallery() {
             alert("Failed to delete image");
         })
     }
+
+    window.onscroll = (e) => {
+        // print "false" if direction is down and "true" if up
+        console.log(this.oldScroll > this.scrollY);
+        this.oldScroll = this.scrollY;
+      }
     
       
         return (
             
             <div className="parentElement">
+                <ToastsContainer className="toast" store={ToastsStore}/>
                <div className="image-view">
                 <InfiniteScroll
                 dataLength={images}
@@ -58,11 +66,7 @@ export default function Gallery() {
                     onPageLoad();
                 }}
                 hasMore={true}
-                endMessage={
-                    <p style={{ textAlign: 'center' }}>
-                    <b>Yay! You have seen it all</b>
-                    </p>
-                }>
+                >
                     <div className="row">
                         <ul className="cards">
                     
@@ -84,7 +88,7 @@ export default function Gallery() {
                                             <span className="hashtag">{ upload.description }</span>
                                         </p>
                                     </div>
-                                        <i className="fa fa-trash" aria-hidden="true" onClick={() => onDelete(upload.id,i)}></i>
+                                        <i className="fa fa-trash" aria-hidden="true" onClick={() => onDelete(upload.id,i, upload.name)}></i>
                                 </div>
                             </li>
                             )

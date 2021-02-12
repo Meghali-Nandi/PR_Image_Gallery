@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 import './login.css';
 import { Route,Redirect } from "react-router-dom";
 
 
 export default class Login extends Component {
-    baseUrl="https://localhost:3000";
+    baseUrl="https://localhost:8080";
     constructor(props){
         super(props)
         this.state = {
@@ -14,9 +14,7 @@ export default class Login extends Component {
             jwt : sessionStorage.getItem('token') || null
         }
     }
-    static contextTypes = {
-        router: PropTypes.object,
-      }
+    
     onChange = (e) =>{
         this.setState({
             [e.target.name] : e.target.value
@@ -36,7 +34,6 @@ export default class Login extends Component {
         })
         .then((response) => response.json())
             .then((result) => {
-                console.log(result);
                 if(result.accessToken){
                     this.setState({
                         jwt: result.accessToken
@@ -45,7 +42,8 @@ export default class Login extends Component {
                     window.location.reload(false);
                 }
                 else{
-                    alert("Invalid credentials");
+                    ToastsStore.error(`Invalid credentials. Please enter correct credentials.`);
+
                 }
             })
             
@@ -58,7 +56,8 @@ export default class Login extends Component {
         return (           
             
             <div className="parent-login">
-                {!this.state.jwt ? 
+                <ToastsContainer className="toast" store={ToastsStore}/>
+               {!this.state.jwt ? 
                 (<div className="login-form">
                     <form className="form-login" onSubmit={this.onSubmit}>
                         <h3 className="h3 mb-3 font-weight-normal text-center">Login</h3>
