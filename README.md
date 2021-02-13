@@ -3,7 +3,7 @@ It is an application in which an user can upload images and then search for imag
 
 ### Pre- requisites
 - Nodejs v12+
-- MySQL
+- MySQL (with a database named "pr_image")
  
 
 ### Features
@@ -40,6 +40,8 @@ The application is enabled with HTTPS. Thus, a pem file and certificate needs to
 [Sanitize](https://www.npmjs.com/package/sanitize) - This library is for the purpose of sanitizing user input. In this project, this library is used to protect the server from invalid inputs from user side or any kind of attack.
 
 ### Use-case Overview
+On loading the index page, the user will be able to login to the application with the following credentials- admin/admin@1234.
+
 The application server is for two APIs - 
 * `/upload` - which is for uploading multiple images or a directory of images
 The user has two options to upload image files - multiple images via drag and drop or by clicking. The image dimension should be greater than `500 px` else the images are not loaded. The name of the image is mandatory. For better user experience, it is default to the name of the image as stored in the local file system. The user is allowed to change the name and add description inclusing hashtags which should be space seperated. For e.g. "#people #travel #traveldiaries". On clicking the upload button, the upload API is triggered. 
