@@ -1,5 +1,5 @@
 # PR_Image_Gallery
-It is an application in which an user can upload images and then view them in gallery.
+It is an application in which a user can upload images and then view them in gallery.
 
 ### Pre- requisites
 - Nodejs v12+
