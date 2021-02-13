@@ -26,7 +26,7 @@ $ npm install
 ### Deployment
 ```sh
 $ cd stock-app-backend
-$ pm2 start parse-apps.config.js
+$ npm start
 ```
 The application is enabled with HTTPS. Thus, a pem file and certificate needs to be generated and included in the  `server.js` file.
 
